@@ -1,5 +1,4 @@
 <?php
-
 namespace Elementor\Includes\Elements;
 
 use Elementor\Controls_Manager;
@@ -17,49 +16,32 @@ use Elementor\Plugin;
 use Elementor\Shapes;
 use Elementor\Utils;
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
 }
 
 class Container extends Element_Base {
 
-    /**
-     * @var \Elementor\Core\Kits\Documents\Kit
-     */
-    private $active_kit;
+	/**
+	 * @var \Elementor\Core\Kits\Documents\Kit
+	 */
+	private $active_kit;
 
-    /**
-     * Container constructor.
-     *
-     * @param array $data
-     * @param array|null $args
-     *
-     * @return void
-     */
-    public function __construct(array $data = [], array $args = null) {
-        parent::__construct($data, $args);
+	/**
+	 * Container constructor.
+	 *
+	 * @param array      $data
+	 * @param array|null $args
+	 *
+	 * @return void
+	 */
+	public function __construct( array $data = [], array $args = null ) {
+		parent::__construct( $data, $args );
 
-        $this->active_kit = Plugin::$instance->kits_manager->get_active_kit();
-
-        // Replace the deprecated dynamic properties with appropriate values
-        $this->set_logical_dimensions_inline_start();
-        $this->set_logical_dimensions_inline_end();
-    }
-
-    /**
-     * Set logical_dimensions_inline_start based on text direction (RTL/LTR).
-     */
-    private function set_logical_dimensions_inline_start() {
-        $this->logical_dimensions_inline_start = is_rtl() ? '{{RIGHT}}{{UNIT}}' : '{{LEFT}}{{UNIT}}';
-    }
-
-    /**
-     * Set logical_dimensions_inline_end based on text direction (RTL/LTR).
-     */
-    private function set_logical_dimensions_inline_end() {
-        $this->logical_dimensions_inline_end = is_rtl() ? '{{LEFT}}{{UNIT}}' : '{{RIGHT}}{{UNIT}}';
-    }
-}
+		$this->active_kit = Plugin::$instance->kits_manager->get_active_kit();
+		$this->logical_dimensions_inline_start = is_rtl() ? '{{RIGHT}}{{UNIT}}' : '{{LEFT}}{{UNIT}}';
+		$this->logical_dimensions_inline_end = is_rtl() ? '{{LEFT}}{{UNIT}}' : '{{RIGHT}}{{UNIT}}';
+	}
 
 	/**
 	 * Get the element type.
