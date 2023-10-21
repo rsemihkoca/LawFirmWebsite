@@ -21,27 +21,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Container extends Element_Base {
+    /**
+     * @var \Elementor\Core\Kits\Documents\Kit
+     */
+    private $active_kit;
 
-	/**
-	 * @var \Elementor\Core\Kits\Documents\Kit
-	 */
-	private $active_kit;
+    /**
+     * @var string
+     */
+    private $logical_dimensions_inline_start;
 
-	/**
-	 * Container constructor.
-	 *
-	 * @param array      $data
-	 * @param array|null $args
-	 *
-	 * @return void
-	 */
-	public function __construct( array $data = [], array $args = null ) {
-		parent::__construct( $data, $args );
+    /**
+     * @var string
+     */
+    private $logical_dimensions_inline_end;
 
-		$this->active_kit = Plugin::$instance->kits_manager->get_active_kit();
-		$this->logical_dimensions_inline_start = is_rtl() ? '{{RIGHT}}{{UNIT}}' : '{{LEFT}}{{UNIT}}';
-		$this->logical_dimensions_inline_end = is_rtl() ? '{{LEFT}}{{UNIT}}' : '{{RIGHT}}{{UNIT}}';
-	}
+    /**
+     * Container constructor.
+     *
+     * @param array      $data
+     * @param array|null $args
+     *
+     * @return void	
+     */
+    public function __construct( array $data = [], array $args = null ) {
+        parent::__construct( $data, $args );
+
+        $this->active_kit = Plugin::$instance->kits_manager->get_active_kit();
+        $this->logical_dimensions_inline_start = is_rtl() ? '{{RIGHT}}{{UNIT}}' : '{{LEFT}}{{UNIT}}';
+        $this->logical_dimensions_inline_end = is_rtl() ? '{{LEFT}}{{UNIT}}' : '{{RIGHT}}{{UNIT}}';
+    }
 
 	/**
 	 * Get the element type.
